@@ -4,30 +4,27 @@
  */
 package ui;
 
-import java.awt.CardLayout;
-import java.awt.Color;
-import javax.swing.JPanel;
-import model.User;
-
 /**
  *
  * @author jq
+ * 
  */
-public class FormPanel extends javax.swing.JPanel {
+    
 
+import java.awt.Color;
+import model.User;
+
+
+public class ViewPanel extends javax.swing.JPanel {
+    private User newUser;
     /**
-     * Creates new form FormPanel
+     * Creates new form ViewPanel
      */
-    
-    private JPanel butPanel;
-
-    
-    public FormPanel(JPanel butPanel) {
+    public ViewPanel(User newUser) {
         initComponents();
-        this.butPanel = butPanel;
+        this.newUser = newUser;
+        populateData();
     }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,7 +62,7 @@ public class FormPanel extends javax.swing.JPanel {
 
         titleLabel.setFont(new java.awt.Font("Hiragino Maru Gothic ProN", 0, 14)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLabel.setText("Customer Registration Form");
+        titleLabel.setText("View Customer Form");
 
         fnLabel.setFont(new java.awt.Font("Hiragino Maru Gothic ProN", 0, 13)); // NOI18N
         fnLabel.setText("First name:");
@@ -102,7 +99,6 @@ public class FormPanel extends javax.swing.JPanel {
             }
         });
 
-        genderGroup.add(maleRadio);
         maleRadio.setText("Male");
         maleRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +106,6 @@ public class FormPanel extends javax.swing.JPanel {
             }
         });
 
-        genderGroup.add(femaleRadio);
         femaleRadio.setText("Female");
 
         genderGroup.add(preferNotRadio);
@@ -122,11 +117,6 @@ public class FormPanel extends javax.swing.JPanel {
         emailText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailTextActionPerformed(evt);
-            }
-        });
-        emailText.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                emailTextKeyPressed(evt);
             }
         });
 
@@ -158,7 +148,7 @@ public class FormPanel extends javax.swing.JPanel {
 
         typeLabel.setText("Type:");
 
-        typeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Other", " " }));
+        typeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Other" }));
         typeCombo.setSelectedIndex(-1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -174,6 +164,9 @@ public class FormPanel extends javax.swing.JPanel {
                                 .addGap(22, 22, 22)
                                 .addComponent(titleLabel))
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addComponent(submitButton))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(fnLabel)
                                     .addComponent(ageLabel)
@@ -183,13 +176,17 @@ public class FormPanel extends javax.swing.JPanel {
                                     .addComponent(photoLabel))
                                 .addGap(48, 48, 48)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(fnText, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lnText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(ageText, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(MsgText)
-                                        .addComponent(photoUpload, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(ageText, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lnText, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fnText, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(photoUpload, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(102, 102, 102)
                         .addComponent(genderLabel)
@@ -202,11 +199,8 @@ public class FormPanel extends javax.swing.JPanel {
                                 .addGap(56, 56, 56)
                                 .addComponent(typeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(maleRadio)
-                            .addComponent(preferNotRadio)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(280, 280, 280)
-                        .addComponent(submitButton)))
-                .addContainerGap(167, Short.MAX_VALUE))
+                            .addComponent(preferNotRadio))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,10 +230,13 @@ public class FormPanel extends javax.swing.JPanel {
                     .addComponent(genderLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(preferNotRadio)
-                .addGap(5, 5, 5)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailLabel)
-                    .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(emailLabel))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(MsgLabel)
@@ -251,9 +248,9 @@ public class FormPanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(photoUpload)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(submitButton)
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -285,6 +282,15 @@ public class FormPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_ageTextActionPerformed
 
+    private void ageTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ageTextKeyPressed
+        try{
+            int age = Integer.parseInt(ageText.getText());
+            ageText.setForeground(Color.BLACK);
+        }catch(Exception e){
+            ageText.setForeground(Color.red);
+        }
+    }//GEN-LAST:event_ageTextKeyPressed
+
     private void maleRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleRadioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_maleRadioActionPerformed
@@ -306,34 +312,9 @@ public class FormPanel extends javax.swing.JPanel {
         newUser.setFirstName(fnText.getText());
         newUser.setLastName(lnText.getText());
         newUser.setAge(ageText.getText());
-        newUser.setEmail(emailText.getText());
         newUser.setGender(genderGroup.getSelection().getActionCommand()); // radio button
-        newUser.setType(typeCombo.getSelectedItem().toString()); // dropdown 
-        newUser.setMessage(MsgText.getText());
-        ViewPanel newViewPanel = new ViewPanel(newUser);
-        CardLayout layout = (CardLayout) butPanel.getLayout();
-        
-        butPanel.add(newViewPanel);
-        layout.next(butPanel);
+        newUser.setType(typeCombo.getSelectedItem().toString()); // dropdown
     }//GEN-LAST:event_submitButtonActionPerformed
-
-    private void ageTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ageTextKeyPressed
-        try{
-            int age = Integer.parseInt(ageText.getText());
-            ageText.setForeground(Color.BLACK);
-        }catch(Exception e){
-            ageText.setForeground(Color.red);
-        }
-    }//GEN-LAST:event_ageTextKeyPressed
-    
-    private void emailTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailTextKeyPressed
-        try{
-            boolean emailValid = emailText.getText().contains("@");
-            ageText.setForeground(Color.BLACK);
-        }catch(Exception e){
-            ageText.setForeground(Color.red);
-        }
-    }//GEN-LAST:event_emailTextKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -360,4 +341,13 @@ public class FormPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> typeCombo;
     private javax.swing.JLabel typeLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void populateData() {
+        fnText.setText(this.newUser.getFirstName());
+        lnText.setText(this.newUser.getLastName());
+        ageText.setText(this.newUser.getAge());
+        emailText.setText(this.newUser.getEmail());
+        MsgText.setText(this.newUser.getMessage());
+        typeCombo.setSelectedItem(this.newUser.getType());
+    }
 }

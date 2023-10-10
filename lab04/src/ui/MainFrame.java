@@ -5,12 +5,15 @@
 package ui;
 
 import java.awt.CardLayout;
+import model.User;
 
 /**
  *
  * @author jq
  */
 public class MainFrame extends javax.swing.JFrame {
+
+    private User newUser;
 
     /**
      * Creates new form MainFrame
@@ -47,6 +50,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         viewButton.setText("View");
+        viewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
         topPanel.setLayout(topPanelLayout);
@@ -92,12 +100,20 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void formButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formButtonActionPerformed
         // show but panel 
-        FormPanel newFormPanel = new FormPanel();
+        FormPanel newFormPanel = new FormPanel(butPanel);
         CardLayout layout = (CardLayout) butPanel.getLayout();
         
         butPanel.add(newFormPanel);
         layout.next(butPanel);
     }//GEN-LAST:event_formButtonActionPerformed
+
+    private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
+        ViewPanel newViewPanel = new ViewPanel(null);
+        CardLayout layout = (CardLayout) butPanel.getLayout();
+        
+        butPanel.add(newViewPanel);
+        layout.next(butPanel);
+    }//GEN-LAST:event_viewButtonActionPerformed
 
     /**
      * @param args the command line arguments
