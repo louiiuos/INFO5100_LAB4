@@ -7,9 +7,13 @@ package ui;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Image;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import model.User;
 import javax.swing.JOptionPane;
+import java.io.File;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -299,9 +303,15 @@ public class FormPanel extends javax.swing.JPanel {
     private void MsgTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MsgTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MsgTextActionPerformed
-
+    
+    String photoPath;
     private void photoUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_photoUploadActionPerformed
-
+        JFileChooser file = new JFileChooser();
+        file.showOpenDialog(null);
+        File f = file.getSelectedFile();
+        
+        photoPath = f.getAbsolutePath();
+ 
     }//GEN-LAST:event_photoUploadActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
@@ -310,6 +320,11 @@ public class FormPanel extends javax.swing.JPanel {
         newUser.setLastName(lnText.getText());
         newUser.setAge(ageText.getText());
         newUser.setEmail(emailText.getText());
+        
+
+        if (genderGroup.getSelection() == null){
+            JOptionPane.showMessageDialog(rootPane, "You didn't choose gender");
+        }
         newUser.setGender(genderGroup.getSelection().getActionCommand()); // radio button
         newUser.setType(typeCombo.getSelectedItem().toString()); // dropdown 
         newUser.setMessage(MsgText.getText());
@@ -318,12 +333,21 @@ public class FormPanel extends javax.swing.JPanel {
         
         butPanel.add(newViewPanel);
         layout.next(butPanel);
-        if (fnText.getText().isEmpty()||lnText.getText().isEmpty()|| ageText.getText().isEmpty()|| MsgText.getText().isEmpty() ){
+        if (fnText.getText().isEmpty()||lnText.getText().isEmpty()|| ageText.getText().isEmpty()
+                || MsgText.getText().isEmpty()||genderGroup.getSelection() == null ){
             JOptionPane.showMessageDialog(rootPane, "Please don't leave blank");
         }
         if (!emailText.getText().contains("@")){
             JOptionPane.showMessageDialog(rootPane, " Your email input format is wrong ");
         }
+        //Photo upload
+        ImageIcon li = new ImageIcon(photoPath);
+        Image resizeLi = li.getImage().getScaledInstance(280, 300,Image.SCALE_DEFAULT);
+        ImageIcon newLi = new ImageIcon(resizeLi);
+        JOptionPane.showMessageDialog(null, "", "customer photo", JOptionPane.INFORMATION_MESSAGE,newLi);
+        
+        // handle the unchoosen genderGroup
+        
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void ageTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ageTextKeyPressed
