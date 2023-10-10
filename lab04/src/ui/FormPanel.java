@@ -6,8 +6,10 @@ package ui;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import javax.swing.JPanel;
 import model.User;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,6 +22,7 @@ public class FormPanel extends javax.swing.JPanel {
      */
     
     private JPanel butPanel;
+    private Component rootPane;
 
     
     public FormPanel(JPanel butPanel) {
@@ -315,6 +318,12 @@ public class FormPanel extends javax.swing.JPanel {
         
         butPanel.add(newViewPanel);
         layout.next(butPanel);
+        if (fnText.getText().isEmpty()||lnText.getText().isEmpty()|| ageText.getText().isEmpty()|| MsgText.getText().isEmpty() ){
+            JOptionPane.showMessageDialog(rootPane, "Please don't leave blank");
+        }
+        if (!emailText.getText().contains("@")){
+            JOptionPane.showMessageDialog(rootPane, " Your email input format is wrong ");
+        }
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void ageTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ageTextKeyPressed
@@ -327,12 +336,7 @@ public class FormPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_ageTextKeyPressed
     
     private void emailTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailTextKeyPressed
-        try{
-            boolean emailValid = emailText.getText().contains("@");
-            ageText.setForeground(Color.BLACK);
-        }catch(Exception e){
-            ageText.setForeground(Color.red);
-        }
+
     }//GEN-LAST:event_emailTextKeyPressed
 
 
