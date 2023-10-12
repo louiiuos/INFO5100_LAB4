@@ -349,5 +349,13 @@ public class ViewPanel extends javax.swing.JPanel {
         emailText.setText(this.newUser.getEmail());
         MsgText.setText(this.newUser.getMessage());
         typeCombo.setSelectedItem(this.newUser.getType());
+        
+        if(this.newUser.getGender().equals("Male")){
+            maleRadio.setSelected(true);
+        }else if(this.newUser.getGender().equals("Female")){
+            femaleRadio.setSelected(true);
+        }else{
+            preferNotRadio.setSelected(true);
+        }
     }
 }

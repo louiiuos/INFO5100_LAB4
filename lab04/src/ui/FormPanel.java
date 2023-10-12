@@ -14,6 +14,7 @@ import model.User;
 import javax.swing.JOptionPane;
 import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -315,6 +316,9 @@ public class FormPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_photoUploadActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        maleRadio.setActionCommand("Male");
+        femaleRadio.setActionCommand("Female");
+        preferNotRadio.setActionCommand("Prefer Not");
         User newUser = new User();
         newUser.setFirstName(fnText.getText());
         newUser.setLastName(lnText.getText());
@@ -363,7 +367,7 @@ public class FormPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_emailTextKeyPressed
 
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel MsgLabel;
     private javax.swing.JTextField MsgText;
@@ -388,4 +392,6 @@ public class FormPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> typeCombo;
     private javax.swing.JLabel typeLabel;
     // End of variables declaration//GEN-END:variables
+
+
 }
